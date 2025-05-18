@@ -26,7 +26,16 @@ class Birthday(models.Model):
     birthday = models.DateField('Дата рождения', validators=(real_age,),)
 
     image = models.ImageField('Фото', upload_to='birthday_images', blank=True)
-
+    
+    author = models.ForeignKey(
+        User,
+        on_delete=models.CASCADE,
+        related_name='birthdays',
+        blank=True,
+        null=True,
+        verbose_name='Автор',
+    )
+    
     tags = models.ManyToManyField(
         Tag,
         verbose_name='Теги',
